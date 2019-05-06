@@ -1,0 +1,20 @@
+.header {
+  padding: 30px;
+  text-align: center;
+  background: #1abd99;
+  color: white;
+  font-size: 30px;
+  height: 120px;
+  margin-bottom : 30px;
+}
+.btn-logout{
+  height: 30px;
+  width: 80px;
+  float:right;
+  font-size: 18px;
+  background-color: transparent;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 5px;
+}

@@ -1,0 +1,24 @@
+<div class="container" style="margin-top: 20px; max-width: 50%;">
+
+  <form [formGroup]="fileAdd" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Secret</label>
+      <input type="text" class="form-control" formControlName="secret" placeholder="Secret">
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('secret', 'required')">This field is required</ng-container>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('file', 'required')">This field is required</ng-container>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Upload</button>
+
+  </form>
+
+</div>

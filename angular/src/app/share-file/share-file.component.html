@@ -1,0 +1,51 @@
+  <h3>Share file</h3>
+  <div>
+    <table class="table table-bordered" >
+      <thead>
+      <tr>
+        <th class="invisible">{{file.fileId}}</th>
+        <th>Name: {{file.name}}</th>
+        <th>Uploaded: {{file.uploaded}}</th>
+        <th>Size: {{file.size}}</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <table class="table table-striped" >
+    <caption>List of users that have access to this file</caption>
+    <thead>
+    <tr>
+      <th class="invisible">userId</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td class="invisible">{{user.userId}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td><button class="btn btn-success" (click)="remove(user)"> Remove</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <form [formGroup]="shareForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Share this file</label>
+      <input type="text" class="form-control" formControlName="username" placeholder="username">
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('username', 'required')">This field is required</ng-container>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Add user</button>
+
+  </form>
+
+  <div *ngIf="userNotFound" class="alert alert-warning">
+    <strong>User not found!</strong>
+  </div>
+

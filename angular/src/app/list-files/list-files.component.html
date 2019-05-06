@@ -1,0 +1,39 @@
+<div class="file-container">
+  <h2>My Files</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="invisible">fileId</th>
+      <th>Name</th>
+      <th>Uploaded</th>
+      <th>Size(Bytes)</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let file of files">
+      <td class="invisible">{{file.fileId}}</td>
+      <td>{{file.name}}</td>
+      <td>{{file.uploaded}}</td>
+      <td>{{file.size}}</td>
+      <td>
+        <button class="btn btn-success"
+                (click)="setFileToDownload(file)"> Download
+        </button>
+        <button class="btn btn-success"
+                (click)="shareFile(file)"
+                style="margin-left: 20px;"> Share
+        </button>
+        <button class="btn btn-success"
+                style="margin-left: 20px;"
+                (click)="deleteFile(file)"> Delete
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+<app-download-file *ngIf="fileToDownload" [file]="fileToDownload"></app-download-file>
+
+<app-add-file (fileUploaded)="refreshFiles()"></app-add-file>
