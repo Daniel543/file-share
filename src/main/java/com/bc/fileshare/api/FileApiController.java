@@ -36,7 +36,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("files")
-public class FileApiController {
+public class  FileApiController {
 
 	private static Logger logger = LoggerFactory.getLogger(FileApiController.class);
 
@@ -47,7 +47,7 @@ public class FileApiController {
 	private UserService userService;
 
 
-	@GetMapping(value = "/download/{id}")
+	@PostMapping(value = "/download/{id}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable int id, @RequestParam(name = "secret") String secret) {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();

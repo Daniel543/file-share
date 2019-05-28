@@ -36,7 +36,7 @@ export class DownloadFileComponent implements OnInit {
   }
 
   submit() {
-    this.apiService.downloadFile(this.file.fileId, this.downloadForm.controls['secret'].value)
+    this.apiService.downloadFile(this.file.fileId, this.downloadForm.value)
       .subscribe(response  => {
         this.saveFile(response.body, this.file.name);
         this.downloadError = false;

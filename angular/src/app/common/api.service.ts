@@ -58,7 +58,7 @@ export class ApiService {
   }
 
   downloadFile(id, secret) {
-    return this.http.get(this.baseUrl + 'files/download/' + id + '?secret=' + secret, {observe: 'response', responseType: 'blob'});
+    return this.http.post(this.baseUrl + 'files/download/' + id, this.toFormData(secret), {observe: 'response', responseType: 'blob'});
   }
 
   getUsersForFile(id) {
