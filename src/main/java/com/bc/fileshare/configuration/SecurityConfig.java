@@ -2,6 +2,7 @@ package com.bc.fileshare.configuration;
 
 import com.bc.fileshare.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,11 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.csrf().disable()
-			.anonymous().disable()
-			.authorizeRequests()
-			.antMatchers("/doc/**").permitAll();
+		http.authorizeRequests().antMatchers("/login","/users").permitAll()
+				.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+				.permitAll()
+				.anyRequest().authenticated()
+				.and().formLogin()
+				.loginPage("/login")
+				.permitAll()
+				.and().csrf().disable()
+				.logout().permitAll();
 	}
 
 

@@ -1,6 +1,7 @@
 package com.bc.fileshare.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 3600; //1 Hour
 	private static final int REFRESH_TOKEN_VALIDITY_SECONDS = 86400; //1 day
 
+	@Value("${fileshare.redirectUriList}")
+	private String redirectUriList;
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -37,7 +41,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		configurer
 			.inMemory()
 			.withClient(CLIENT_ID)
-			.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+			.redirectUris(redirectUriList)
+			.authorizedGrantTypes("implicit")
 			.secret(CLIENT_SECRET)
 			.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
 			.refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS)
