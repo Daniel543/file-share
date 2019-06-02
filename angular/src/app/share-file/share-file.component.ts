@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApiService} from '../common/api.service';
+import {AuthService} from '../common/auth.service';
 
 
 @Component({
@@ -24,9 +25,10 @@ export class ShareFileComponent implements OnInit {
   userNotFound : boolean;
   file: any;
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder,private router: Router,
+    private apiService: ApiService, private authService: AuthService) { }
   ngOnInit() {
-    if (!window.sessionStorage.getItem('token')) {
+    if (!this.authService.isLoggedIn()) {
       this.router.navigate(['login']);
       return;
     }

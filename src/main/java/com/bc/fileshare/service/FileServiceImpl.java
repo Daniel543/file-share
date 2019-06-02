@@ -33,6 +33,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -100,7 +101,7 @@ public class FileServiceImpl implements FileService {
 
 
 	private byte[] encryptData(byte[] data, String secret) throws NoSuchPaddingException, NoSuchAlgorithmException, IOException, InvalidKeyException {
-		SecretKey secretKey = getSecretKeyFromSecretString(secret);
+		SecretKey secretKey = new SecretKeySpec(addPadding(secret), "AES");
 		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
 		cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -113,7 +114,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	private byte[] decryptData(byte[] data, String secret) throws NoSuchPaddingException, NoSuchAlgorithmException, IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-		SecretKey secretKey = getSecretKeyFromSecretString(secret);
+		SecretKey secretKey = new SecretKeySpec(addPadding(secret), "AES");
 		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
 		byte[] fileIv = new byte[16];
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
@@ -126,6 +127,10 @@ public class FileServiceImpl implements FileService {
 	private SecretKey getSecretKeyFromSecretString(String secret) {
 		byte[] keyEncoded = Base64.getDecoder().decode(secret);
 		return new SecretKeySpec(keyEncoded, 0, keyEncoded.length, "AES");
+	}
+
+	private byte[] addPadding(String pwd){
+		return Arrays.copyOf(pwd.getBytes(), 16);
 	}
 
 }

@@ -5,6 +5,7 @@ import {
   HttpClientModule
 } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {OAuthModule} from 'angular-oauth2-oidc';
 import {routing} from './app.routing';
 
 
@@ -38,7 +39,8 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     routing,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [ApiService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

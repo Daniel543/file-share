@@ -46,7 +46,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 						)
 				)
 				.and()
-				.authorizeRequests().anyRequest().authenticated();
+				.authorizeRequests().anyRequest().authenticated()
+				.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 
 

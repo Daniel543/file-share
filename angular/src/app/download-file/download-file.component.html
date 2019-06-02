@@ -1,8 +1,8 @@
 <div>
   <form [formGroup]="downloadForm" (ngSubmit)="submit()">
-    <label>Enter secret to download requested file</label>
+    <label>Enter password to download requested file</label>
     <div class="form-group">
-      <input type="text" class="form-control" formControlName="secret" placeholder="secret">
+      <input type="password" [maxLength]="15" class="form-control" formControlName="secret" placeholder="Password">
       <div class="invalid-feedback" style="display: block">
         <ng-container *ngIf="hasError('secret', 'required')">This field is required</ng-container>
       </div>
@@ -13,7 +13,7 @@
   </form>
 
   <div *ngIf="downloadError"  class="alert alert-danger">
-    <strong> Incorrect secret! </strong>
+    <strong> Incorrect password! </strong>
   </div>
 
 </div>

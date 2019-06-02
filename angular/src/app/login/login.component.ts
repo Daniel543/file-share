@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ApiService} from "../common/api.service";
-import {HttpParams} from "@angular/common/http";
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ApiService} from '../common/api.service';
+import {HttpParams} from '@angular/common/http';
+import {AuthService} from '../common/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +21,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invalidLogin: boolean = false;
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
-  onSubmit() {
+  constructor(private formBuilder: FormBuilder, private router: Router,
+    private apiService: ApiService, private authService: AuthService) {
+  }
+
+  o;/*nSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
@@ -31,14 +42,24 @@ export class LoginComponent implements OnInit {
     }, error => {
       alert(error.error.error_description)
     });
-  }
+  }*/
 
   ngOnInit() {
-    window.sessionStorage.removeItem('token');
+    this.authService.logout();
+    /*window.sessionStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]
-    });
+    });*/
+
+  }
+
+  login() {
+    this.authService.login();
+  }
+
+  register() {
+    this.router.navigate(['register']);
   }
 
 

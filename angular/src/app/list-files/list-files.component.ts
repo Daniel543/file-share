@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../common/api.service';
+import {AuthService} from '../common/auth.service';
 
 @Component({
   selector: 'app-list-files',
@@ -15,16 +16,21 @@ export class ListFilesComponent implements OnInit {
   files: any;
   fileToDownload: any;
 
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(private router: Router, private apiService: ApiService, private authService: AuthService) {
   }
 
   ngOnInit() {
 
-    if (!window.sessionStorage.getItem('token')) {
+    /*if (!window.sessionStorage.getItem('token')) {
+      this.router.navigate(['login']);
+      return;
+    }*/
+    if (!this.authService.isLoggedIn()){
       this.router.navigate(['login']);
       return;
     }
     this.refreshFiles();
+
   }
 
   refreshFiles(): void {

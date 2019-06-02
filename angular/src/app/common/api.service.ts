@@ -22,28 +22,6 @@ export class ApiService {
     return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});// TODO
   }
 
-  /*public upload(data, userId) {
-    let uploadURL = `${this.baseUrl}/auth/${userId}/avatar`;
-
-    return this.http.post<any>(uploadURL, data, {
-      reportProgress: true,
-      observe: 'events'
-    }).pipe(map((event) => {
-
-        switch (event.type) {
-
-          case HttpEventType.UploadProgress:
-            const progress = Math.round(100 * event.loaded / event.total);
-            return { status: 'progress', message: progress };
-
-          case HttpEventType.Response:
-            return event.body;
-          default:
-            return `Unhandled event: ${event.type}`;
-        }
-      })
-    );
-  }*/
 
   getFiles() {
     return this.http.get(this.baseUrl + 'files');

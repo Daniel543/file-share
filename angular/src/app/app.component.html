@@ -3,9 +3,10 @@
 <div class="header">
 
   <h1>
-    Fileshare
+    <a style="color: white; text-decoration: none" href="/">Fileshare</a>
+
   </h1>
-  <button class="button btn-logout" onclick="location.href = 'login';">Logout</button>
+  <button class="button btn-logout" onclick="location.href = 'login';" *ngIf="isUserLoggedIn()">Logout</button>
 </div>
 <div class="container">
 <router-outlet></router-outlet>

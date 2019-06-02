@@ -44,11 +44,6 @@ export class AddFileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getSecret()
-      .subscribe(data => {
-        this.secret = data;
-        this.fileAdd.controls['secret'].setValue(this.secret.value);
-      });
 
   }
 

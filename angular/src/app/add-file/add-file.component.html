@@ -2,8 +2,8 @@
 
   <form [formGroup]="fileAdd" (ngSubmit)="submit()">
     <div class="form-group">
-      <label>Secret</label>
-      <input type="text" class="form-control" formControlName="secret" placeholder="Secret">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="secret" placeholder="Password" [maxLength]="15">
       <div class="invalid-feedback" style="display: block">
         <ng-container *ngIf="hasError('secret', 'required')">This field is required</ng-container>
       </div>
